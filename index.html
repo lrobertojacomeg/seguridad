@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Test de Ciberseguridad</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7fb;
+      color: #1f2937;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 30px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 25px;
+    }
+
+    .user-box {
+      background: #eef6ff;
+      border: 1px solid #bfdbfe;
+      padding: 18px;
+      border-radius: 14px;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .question {
+      padding: 20px;
+      margin-bottom: 18px;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      background: #ffffff;
+    }
+
+    .question h3 {
+      margin-top: 0;
+      color: #111827;
+      font-size: 17px;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 12px;
+      margin: 8px 0;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background: #f1f5f9;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 25px;
+    }
+
+    button {
+      border: none;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .primary:hover {
+      background: #1d4ed8;
+    }
+
+    .secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .secondary:hover {
+      background: #d1d5db;
+    }
+
+    .result {
+      display: none;
+      margin-top: 30px;
+      padding: 25px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      text-align: center;
+    }
+
+    .score {
+      font-size: 42px;
+      font-weight: bold;
+      color: #2563eb;
+      margin: 10px 0;
+    }
+
+    .level {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .feedback {
+      font-size: 16px;
+      color: #475569;
+      margin-top: 10px;
+    }
+
+    .review {
+      display: none;
+      margin-top: 25px;
+    }
+
+    .correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+    }
+
+    .incorrect {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+    }
+
+    .unanswered {
+      border: 2px solid #f59e0b;
+    }
+
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .buttons {
+        display: none;
+      }
+
+      .container {
+        box-shadow: none;
+        margin: 0;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Test de Ciberseguridad</h1>
+    <p class="subtitle">Para usuarios no técnicos · 20 preguntas · Evaluación automática</p>
+
+    <div class="user-box">
+      <label for="nombre">Nombre del participante</label>
+      <input type="text" id="nombre" placeholder="Ejemplo: Juan Pérez">
+
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" placeholder="Ejemplo: participante@correo.com">
+    </div>
+
+    <form id="quizForm"></form>
+
+    <div class="buttons">
+      <button class="primary" onclick="evaluar()" type="button">Evaluar test</button>
+      <button class="secondary" onclick="reiniciar()" type="button">Reiniciar</button>
+      <button class="secondary" onclick="window.print()" type="button">Imprimir resultado</button>
+    </div>
+
+    <div id="result" class="result">
+      <h2>Resultado</h2>
+      <p id="participant"></p>
+      <div id="score" class="score"></div>
+      <div id="level" class="level"></div>
+      <p id="feedback" class="feedback"></p>
+    </div>
+
+    <div id="review" class="review"></div>
+
+    <div class="footer">
+      Este test es una herramienta básica de sensibilización en ciberseguridad.
+    </div>
+  </div>
+
+<script>
+const preguntas = [
+  {
+    pregunta: "¿Qué es una contraseña segura?",
+    opciones: [
+      "12345678",
+      "Tu nombre y año de nacimiento",
+      "Una combinación larga de letras, números y símbolos",
+      "La palabra “password”"
+    ],
+    correcta: 2
+  },
+  {
+    pregunta: "Si recibes un correo de un banco pidiéndote tu clave, ¿qué debes hacer?",
+    opciones: [
+      "Responder con tus datos",
+      "Verificar directamente con el banco por canales oficiales",
+      "Reenviarlo a tus contactos",
+      "Abrir todos los enlaces"
+    ],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Qué es el phishing?",
+    opciones: [
+      "Un antivirus",
+      "Un intento de engaño para robar información",
+      "Una copia de seguridad",
+      "Un programa para mejorar internet"
+    ],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Por qué no se debe usar la misma contraseña en todas las cuentas?",
+    opciones: [
+      "Porque es difícil escribirla",
+      "Porque si una cuenta es vulnerada, las demás quedan en riesgo",
+      "Porque ocupa espacio",
+      "Porque bloquea el correo"
+    ],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Cuál acción protege mejor una cuenta?",
+    opciones: [
+      "Compartir la contraseña",
+      "Guardar la clave en el escritorio",
+      "Activar la verificación en dos pasos",
+      "Usar una clave fácil"
+    ],
+    correcta: 2
+  },
+  {
+    pregunta: "Si aparece una alerta que dice “Tu computadora está infectada, haz clic aquí”, debes:",
+    opciones: [
+      "Hacer clic de inmediato",
+      "Descargar lo que indique",
+      "Cerrar la ventana y consultar con soporte o herramientas confiables",
+      "Compartir la alerta"
+    ],
+    correcta: 2
+  },
+  {
+    pregunta: "Antes de abrir un enlace debes revisar:",
+    opciones: [
+      "Si tiene colores llamativos",
+      "Si el remitente y el enlace parecen legítimos",
+      "Si llegó rápido",
+      "Si tiene emojis"
+    ],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Qué es la verificación en dos pasos?",
+    opciones: [
+      "Usar dos computadoras",
+      "Cambiar la clave dos veces",
+      "Un segundo paso de seguridad además de la contraseña",
+      "Tener dos correos"
+    ],
+    correcta: 2
+  },
+  {
+    pregunta: "¿Qué es recomendable al usar Wi-Fi público?",
+    opciones: [
+      "Hacer transacciones bancarias sin cuidado",
+      "Compartir archivos privados",
+      "Evitar operaciones sensibles en redes no confiables",
+      "Desactivar la seguridad del celular"
+    ],
+    correcta: 2
+  },
+  {
+    pregunta: "Si recibes un archivo adjunto inesperado de alguien desconocido:",
+    opciones: [
+      "Lo abres",
+      "Lo descargas",
+      "No lo abres y verificas su origen",
+      "Lo compartes"
+    ],
+    correcta: 2
+  },
+  {
+    pregunta: "¿Por qué son importantes las actualizaciones?",
+    opciones: [
+      "Cambian el fondo de pantalla",
+      "Corrigen fallos y vulnerabilidades",
+      "Eliminan todos los archivos",
+      "Hacen más lento el equipo"
+    ],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Cuál puede ser señal de fraude?",
+    opciones: [
+      "“Tu cuenta será bloqueada hoy, entra aquí”",
+      "Una reunión agendada",
+      "Un correo esperado",
+      "Un mensaje de saludo"
+    ],
+    correcta: 0
+  },
+  {
+    pregunta: "¿Qué debes hacer con información confidencial en redes sociales?",
+    opciones: [
+      "Publicarla",
+      "Compartirla con desconocidos",
+      "Evitar compartirla públicamente",
+      "Guardarla en comentarios"
+    ],
+    correcta: 2
+  },
+  {
+    pregunta: "Si alguien de “soporte técnico” te pide tu contraseña:",
+    opciones: [
+      "Se la das",
+      "Le das una parte",
+      "No la compartes y verificas por un canal oficial",
+      "La envías por mensaje"
+    ],
+    correcta: 2
+  },
+  {
+    pregunta: "¿Qué es una copia de seguridad?",
+    opciones: [
+      "Una segunda cuenta",
+      "Una copia de archivos importantes para recuperarlos",
+      "Un antivirus",
+      "Una clave nueva"
+    ],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Cuál es una buena práctica para contraseñas?",
+    opciones: [
+      "Usar cumpleaños",
+      "Usar 1234",
+      "Crear contraseñas largas y únicas",
+      "Repetir la misma clave"
+    ],
+    correcta: 2
+  },
+  {
+    pregunta: "¿Qué pasa si dejas tu sesión abierta en una computadora compartida?",
+    opciones: [
+      "Nada",
+      "Otra persona puede acceder a tu información",
+      "Se apaga el equipo",
+      "Se borra internet"
+    ],
+    correcta: 1
+  },
+  {
+    pregunta: "Si un contacto te envía un enlace raro:",
+    opciones: [
+      "Lo abres porque lo envió alguien conocido",
+      "Confirmas por otro medio si realmente lo envió",
+      "Lo reenvías",
+      "Lo guardas"
+    ],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Cuál es un comportamiento seguro?",
+    opciones: [
+      "Abrir premios inesperados",
+      "Descargar programas de cualquier página",
+      "Verificar remitentes, enlaces y permisos",
+      "Compartir códigos de verificación"
+    ],
+    correcta: 2
+  },
+  {
+    pregunta: "Si sospechas que tu cuenta fue comprometida:",
+    opciones: [
+      "Esperas",
+      "Cambias la contraseña y reportas el incidente",
+      "Lo publicas en redes",
+      "Borras fotos"
+    ],
+    correcta: 1
+  }
+];
+
+function cargarPreguntas() {
+  const form = document.getElementById("quizForm");
+  form.innerHTML = "";
+
+  preguntas.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "question";
+    div.id = "question-" + index;
+
+    let html = `<h3>${index + 1}. ${item.pregunta}</h3>`;
+
+    item.opciones.forEach((opcion, i) => {
+      html += `
+        <label class="option" id="option-${index}-${i}">
+          <input type="radio" name="q${index}" value="${i}">
+          ${opcion}
+        </label>
+      `;
+    });
+
+    div.innerHTML = html;
+    form.appendChild(div);
+  });
+}
+
+function evaluar() {
+  let puntaje = 0;
+  let respondidas = 0;
+
+  preguntas.forEach((item, index) => {
+    const opciones = document.getElementsByName("q" + index);
+    const questionDiv = document.getElementById("question-" + index);
+    questionDiv.classList.remove("unanswered");
+
+    opciones.forEach(op => {
+      const label = document.getElementById(`option-${index}-${op.value}`);
+      label.classList.remove("correct", "incorrect");
+    });
+
+    let seleccion = null;
+
+    opciones.forEach(op => {
+      if (op.checked) {
+        seleccion = parseInt(op.value);
+        respondidas++;
+      }
+    });
+
+    const correcta = item.correcta;
+    document.getElementById(`option-${index}-${correcta}`).classList.add("correct");
+
+    if (seleccion === correcta) {
+      puntaje++;
+    } else if (seleccion !== null) {
+      document.getElementById(`option-${index}-${seleccion}`).classList.add("incorrect");
+    } else {
+      questionDiv.classList.add("unanswered");
+    }
+  });
+
+  if (respondidas < preguntas.length) {
+    alert("Responde todas las preguntas antes de evaluar. Las preguntas sin responder quedaron marcadas.");
+    return;
+  }
+
+  const porcentaje = Math.round((puntaje / preguntas.length) * 100);
+  let nivel = "";
+  let feedback = "";
+
+  if (puntaje >= 18) {
+    nivel = "Excelente nivel de ciberseguridad";
+    feedback = "Muy bien. Reconoces riesgos comunes y sabes cómo actuar de forma segura.";
+  } else if (puntaje >= 15) {
+    nivel = "Buen nivel";
+    feedback = "Tienes una buena base, pero conviene reforzar algunos hábitos de seguridad.";
+  } else if (puntaje >= 11) {
+    nivel = "Nivel aceptable";
+    feedback = "Conoces algunos conceptos, pero necesitas reforzar temas como phishing, contraseñas y enlaces sospechosos.";
+  } else {
+    nivel = "Riesgo alto";
+    feedback = "Se recomienda una capacitación básica inmediata en ciberseguridad.";
+  }
+
+  const nombre = document.getElementById("nombre").value.trim() || "Participante";
+  const correo = document.getElementById("correo").value.trim();
+
+  document.getElementById("participant").innerHTML =
+    `<strong>${nombre}</strong>${correo ? " · " + correo : ""}`;
+
+  document.getElementById("score").textContent =
+    `${puntaje}/${preguntas.length} (${porcentaje}%)`;
+
+  document.getElementById("level").textContent = nivel;
+  document.getElementById("feedback").textContent = feedback;
+
+  document.getElementById("result").style.display = "block";
+  document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+}
+
+function reiniciar() {
+  if (!confirm("¿Deseas reiniciar el test?")) return;
+
+  document.getElementById("quizForm").reset();
+  document.getElementById("result").style.display = "none";
+
+  preguntas.forEach((item, index) => {
+    document.getElementById("question-" + index).classList.remove("unanswered");
+    item.opciones.forEach((opcion, i) => {
+      document.getElementById(`option-${index}-${i}`).classList.remove("correct", "incorrect");
+    });
+  });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+cargarPreguntas();
+</script>
+
+</body>
+</html>
