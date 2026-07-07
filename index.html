@@ -204,13 +204,13 @@
 
   <div class="container">
     <h1>Test de Ciberseguridad</h1>
-    <p class="subtitle">Para usuarios no técnicos · 20 preguntas · Evaluación automática</p>
+    <p class="subtitle">Para usuarios no t&eacute;cnicos Â· 20 preguntas Â· Evaluaci&oacute;n autom&aacute;tica</p>
 
     <div class="user-box">
       <label for="nombre">Nombre del participante</label>
-      <input type="text" id="nombre" placeholder="Ejemplo: Juan Pérez">
+      <input type="text" id="nombre" placeholder="Ejemplo: Juan P&eacute;rez">
 
-      <label for="correo">Correo electrónico</label>
+      <label for="correo">Correo electr&oacute;nico</label>
       <input type="email" id="correo" placeholder="Ejemplo: participante@correo.com">
     </div>
 
@@ -233,24 +233,24 @@
     <div id="review" class="review"></div>
 
     <div class="footer">
-      Este test es una herramienta básica de sensibilización en ciberseguridad.
+      Este test es una herramienta b&aacute;sica de sensibilizaci&oacute;n en ciberseguridad.
     </div>
   </div>
 
 <script>
 const preguntas = [
   {
-    pregunta: "¿Qué es una contraseña segura?",
+    pregunta: "Â¿Qu&eacute; es una contrase&ntilde;a segura?",
     opciones: [
       "12345678",
-      "Tu nombre y año de nacimiento",
-      "Una combinación larga de letras, números y símbolos",
-      "La palabra “password”"
+      "Tu nombre y a&ntilde;o de nacimiento",
+      "Una combinaci&oacute;n larga de letras, n&uacute;meros y s&iacute;mbolos",
+      "La palabra â€œpasswordâ€"
     ],
     correcta: 2
   },
   {
-    pregunta: "Si recibes un correo de un banco pidiéndote tu clave, ¿qué debes hacer?",
+    pregunta: "Si recibes un correo de un banco pidi&eacute;ndote tu clave, Â¿qu&eacute; debes hacer?",
     opciones: [
       "Responder con tus datos",
       "Verificar directamente con el banco por canales oficiales",
@@ -260,37 +260,37 @@ const preguntas = [
     correcta: 1
   },
   {
-    pregunta: "¿Qué es el phishing?",
+    pregunta: "Â¿Qu&eacute; es el phishing?",
     opciones: [
       "Un antivirus",
-      "Un intento de engaño para robar información",
+      "Un intento de enga&ntilde;o para robar informaci&oacute;n",
       "Una copia de seguridad",
       "Un programa para mejorar internet"
     ],
     correcta: 1
   },
   {
-    pregunta: "¿Por qué no se debe usar la misma contraseña en todas las cuentas?",
+    pregunta: "Â¿Por qu&eacute; no se debe usar la misma contrase&ntilde;a en todas las cuentas?",
     opciones: [
-      "Porque es difícil escribirla",
-      "Porque si una cuenta es vulnerada, las demás quedan en riesgo",
+      "Porque es dif&iacute;cil escribirla",
+      "Porque si una cuenta es vulnerada, las dem&aacute;s quedan en riesgo",
       "Porque ocupa espacio",
       "Porque bloquea el correo"
     ],
     correcta: 1
   },
   {
-    pregunta: "¿Cuál acción protege mejor una cuenta?",
+    pregunta: "Â¿Cu&aacute;l acci&oacute;n protege mejor una cuenta?",
     opciones: [
-      "Compartir la contraseña",
+      "Compartir la contrase&ntilde;a",
       "Guardar la clave en el escritorio",
-      "Activar la verificación en dos pasos",
-      "Usar una clave fácil"
+      "Activar la verificaci&oacute;n en dos pasos",
+      "Usar una clave f&aacute;cil"
     ],
     correcta: 2
   },
   {
-    pregunta: "Si aparece una alerta que dice “Tu computadora está infectada, haz clic aquí”, debes:",
+    pregunta: "Si aparece una alerta que dice â€œTu computadora est&aacute; infectada, haz clic aqu&iacute;â€, debes:",
     opciones: [
       "Hacer clic de inmediato",
       "Descargar lo que indique",
@@ -303,24 +303,24 @@ const preguntas = [
     pregunta: "Antes de abrir un enlace debes revisar:",
     opciones: [
       "Si tiene colores llamativos",
-      "Si el remitente y el enlace parecen legítimos",
-      "Si llegó rápido",
+      "Si el remitente y el enlace parecen leg&iacute;timos",
+      "Si lleg&oacute; r&aacute;pido",
       "Si tiene emojis"
     ],
     correcta: 1
   },
   {
-    pregunta: "¿Qué es la verificación en dos pasos?",
+    pregunta: "Â¿Qu&eacute; es la verificaci&oacute;n en dos pasos?",
     opciones: [
       "Usar dos computadoras",
       "Cambiar la clave dos veces",
-      "Un segundo paso de seguridad además de la contraseña",
+      "Un segundo paso de seguridad adem&aacute;s de la contrase&ntilde;a",
       "Tener dos correos"
     ],
     correcta: 2
   },
   {
-    pregunta: "¿Qué es recomendable al usar Wi-Fi público?",
+    pregunta: "Â¿Qu&eacute; es recomendable al usar Wi-Fi p&uacute;blico?",
     opciones: [
       "Hacer transacciones bancarias sin cuidado",
       "Compartir archivos privados",
@@ -340,47 +340,47 @@ const preguntas = [
     correcta: 2
   },
   {
-    pregunta: "¿Por qué son importantes las actualizaciones?",
+    pregunta: "Â¿Por qu&eacute; son importantes las actualizaciones?",
     opciones: [
       "Cambian el fondo de pantalla",
       "Corrigen fallos y vulnerabilidades",
       "Eliminan todos los archivos",
-      "Hacen más lento el equipo"
+      "Hacen m&aacute;s lento el equipo"
     ],
     correcta: 1
   },
   {
-    pregunta: "¿Cuál puede ser señal de fraude?",
+    pregunta: "Â¿Cu&aacute;l puede ser se&ntilde;al de fraude?",
     opciones: [
-      "“Tu cuenta será bloqueada hoy, entra aquí”",
-      "Una reunión agendada",
+      "â€œTu cuenta ser&aacute; bloqueada hoy, entra aqu&iacute;â€",
+      "Una reuni&oacute;n agendada",
       "Un correo esperado",
       "Un mensaje de saludo"
     ],
     correcta: 0
   },
   {
-    pregunta: "¿Qué debes hacer con información confidencial en redes sociales?",
+    pregunta: "Â¿Qu&eacute; debes hacer con informaci&oacute;n confidencial en redes sociales?",
     opciones: [
       "Publicarla",
       "Compartirla con desconocidos",
-      "Evitar compartirla públicamente",
+      "Evitar compartirla p&uacute;blicamente",
       "Guardarla en comentarios"
     ],
     correcta: 2
   },
   {
-    pregunta: "Si alguien de “soporte técnico” te pide tu contraseña:",
+    pregunta: "Si alguien de â€œsoporte t&eacute;cnicoâ€ te pide tu contrase&ntilde;a:",
     opciones: [
       "Se la das",
       "Le das una parte",
       "No la compartes y verificas por un canal oficial",
-      "La envías por mensaje"
+      "La env&iacute;as por mensaje"
     ],
     correcta: 2
   },
   {
-    pregunta: "¿Qué es una copia de seguridad?",
+    pregunta: "Â¿Qu&eacute; es una copia de seguridad?",
     opciones: [
       "Una segunda cuenta",
       "Una copia de archivos importantes para recuperarlos",
@@ -390,42 +390,42 @@ const preguntas = [
     correcta: 1
   },
   {
-    pregunta: "¿Cuál es una buena práctica para contraseñas?",
+    pregunta: "Â¿Cu&aacute;l es una buena pr&aacute;ctica para contrase&ntilde;as?",
     opciones: [
-      "Usar cumpleaños",
+      "Usar cumplea&ntilde;os",
       "Usar 1234",
-      "Crear contraseñas largas y únicas",
+      "Crear contrase&ntilde;as largas y &uacute;nicas",
       "Repetir la misma clave"
     ],
     correcta: 2
   },
   {
-    pregunta: "¿Qué pasa si dejas tu sesión abierta en una computadora compartida?",
+    pregunta: "Â¿Qu&eacute; pasa si dejas tu sesi&oacute;n abierta en una computadora compartida?",
     opciones: [
       "Nada",
-      "Otra persona puede acceder a tu información",
+      "Otra persona puede acceder a tu informaci&oacute;n",
       "Se apaga el equipo",
       "Se borra internet"
     ],
     correcta: 1
   },
   {
-    pregunta: "Si un contacto te envía un enlace raro:",
+    pregunta: "Si un contacto te env&iacute;a un enlace raro:",
     opciones: [
-      "Lo abres porque lo envió alguien conocido",
-      "Confirmas por otro medio si realmente lo envió",
-      "Lo reenvías",
+      "Lo abres porque lo envi&oacute; alguien conocido",
+      "Confirmas por otro medio si realmente lo envi&oacute;",
+      "Lo reenv&iacute;as",
       "Lo guardas"
     ],
     correcta: 1
   },
   {
-    pregunta: "¿Cuál es un comportamiento seguro?",
+    pregunta: "Â¿Cu&aacute;l es un comportamiento seguro?",
     opciones: [
       "Abrir premios inesperados",
-      "Descargar programas de cualquier página",
+      "Descargar programas de cualquier p&aacute;gina",
       "Verificar remitentes, enlaces y permisos",
-      "Compartir códigos de verificación"
+      "Compartir c&oacute;digos de verificaci&oacute;n"
     ],
     correcta: 2
   },
@@ -433,7 +433,7 @@ const preguntas = [
     pregunta: "Si sospechas que tu cuenta fue comprometida:",
     opciones: [
       "Esperas",
-      "Cambias la contraseña y reportas el incidente",
+      "Cambias la contrase&ntilde;a y reportas el incidente",
       "Lo publicas en redes",
       "Borras fotos"
     ],
@@ -512,23 +512,23 @@ function evaluar() {
 
   if (puntaje >= 18) {
     nivel = "Excelente nivel de ciberseguridad";
-    feedback = "Muy bien. Reconoces riesgos comunes y sabes cómo actuar de forma segura.";
+    feedback = "Muy bien. Reconoces riesgos comunes y sabes c&oacute;mo actuar de forma segura.";
   } else if (puntaje >= 15) {
     nivel = "Buen nivel";
-    feedback = "Tienes una buena base, pero conviene reforzar algunos hábitos de seguridad.";
+    feedback = "Tienes una buena base, pero conviene reforzar algunos h&aacute;bitos de seguridad.";
   } else if (puntaje >= 11) {
     nivel = "Nivel aceptable";
-    feedback = "Conoces algunos conceptos, pero necesitas reforzar temas como phishing, contraseñas y enlaces sospechosos.";
+    feedback = "Conoces algunos conceptos, pero necesitas reforzar temas como phishing, contrase&ntilde;as y enlaces sospechosos.";
   } else {
     nivel = "Riesgo alto";
-    feedback = "Se recomienda una capacitación básica inmediata en ciberseguridad.";
+    feedback = "Se recomienda una capacitaci&oacute;n b&aacute;sica inmediata en ciberseguridad.";
   }
 
   const nombre = document.getElementById("nombre").value.trim() || "Participante";
   const correo = document.getElementById("correo").value.trim();
 
   document.getElementById("participant").innerHTML =
-    `<strong>${nombre}</strong>${correo ? " · " + correo : ""}`;
+    `<strong>${nombre}</strong>${correo ? " Â· " + correo : ""}`;
 
   document.getElementById("score").textContent =
     `${puntaje}/${preguntas.length} (${porcentaje}%)`;
@@ -541,7 +541,7 @@ function evaluar() {
 }
 
 function reiniciar() {
-  if (!confirm("¿Deseas reiniciar el test?")) return;
+  if (!confirm("Â¿Deseas reiniciar el test?")) return;
 
   document.getElementById("quizForm").reset();
   document.getElementById("result").style.display = "none";
